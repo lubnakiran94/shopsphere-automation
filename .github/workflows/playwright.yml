@@ -6,8 +6,32 @@ on:
 
   pull_request:
     branches: [main, master]
+  
+  schedule:
+    - cron: "0 2 * * *"
 
 jobs:
+
+unit-tests:
+    name: Unit Tests
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Unit Tests
+        run: npm run test:unit
 
   # =========================
   # SMOKE TESTS
@@ -15,6 +39,7 @@ jobs:
 
   smoke:
     name: Smoke Tests
+     needs: unit-tests
     timeout-minutes: 20
     runs-on: ubuntu-latest
 
@@ -92,3 +117,4 @@ jobs:
         with:
           name: regression-report-${{ matrix.browser }}
           path: playwright-report/
+           retention-days: 14
