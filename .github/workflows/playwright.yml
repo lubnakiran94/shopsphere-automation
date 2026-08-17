@@ -39,7 +39,7 @@ unit-tests:
 
   smoke:
     name: Smoke Tests
-     needs: unit-tests
+    needs: unit-tests
     timeout-minutes: 20
     runs-on: ubuntu-latest
 
