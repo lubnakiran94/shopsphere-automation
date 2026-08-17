@@ -1,6 +1,6 @@
 import { test, expect } from "../../fixtures/baseTest";
 
-test("TC-CART-001 - Added product appears in cart", async ({
+test("@smoke TC-CART-001 - Added product appears in cart", async ({
     productPage,
     cartPage
 }) => {

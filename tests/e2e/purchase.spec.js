@@ -1,6 +1,6 @@
 import { test, expect } from "../../fixtures/baseTest";
 
-test("TC-E2E-001 - Complete purchase flow", async ({
+test("@e2e TC-E2E-001 - Complete purchase flow", async ({
     page,
     productPage,
     cartPage,

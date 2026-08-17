@@ -7,7 +7,7 @@ test.use({
         origins: []
     }
 });
-test("TC-LOGIN-001 - Standard user can login", async ({
+test("@smokeTC-LOGIN-001 - Standard user can login", async ({
     loginPage,
     page
 }) => {
@@ -36,7 +36,7 @@ test("TC-LOGIN-001 - Standard user can login", async ({
 });
 
 // TC-LOGIN-002
-test("TC-LOGIN-002 - Invalid password", async ({
+test("@regression TC-LOGIN-002 - Invalid password", async ({
     loginPage
 }) => {
 

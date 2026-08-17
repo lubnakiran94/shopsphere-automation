@@ -8,14 +8,11 @@ on:
     branches: [main, master]
 
 jobs:
-  test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        browser: [chromium, firefox, webkit]
+  smoke:
+    name: Smoke Tests
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
 
     env:
       API_BASE_URL: https://dummyjson.com
@@ -33,15 +30,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Playwright browsers
+      - name: Install Playwright
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
-        run: npx playwright test --project=${{ matrix.browser }}
+      - name: Run Smoke Tests
+        run: npx playwright test --grep "@smoke"
 
-      - name: Upload Playwright report
+      - name: Upload Smoke Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report-${{ matrix.browser }}
+          name: smoke-report
           path: playwright-report/

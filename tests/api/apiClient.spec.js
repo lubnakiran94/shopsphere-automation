@@ -2,7 +2,7 @@ import { test, expect } from "../../fixtures/baseTest";
 import { createProductData } from "../../utils/productFactory";
 
 
-test("API-011 - Get products using API client", async ({
+test("@api API-011 - Get products using API client", async ({
     apiClient
 }) => {
 
@@ -20,7 +20,7 @@ test("API-011 - Get products using API client", async ({
 
 });
 
-test("API 002 - Login using API client", async({
+test("@api API 002 - Login using API client", async({
     apiClient
     })=>{
         const response = await apiClient.login(

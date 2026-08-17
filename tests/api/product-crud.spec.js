@@ -40,7 +40,7 @@ test("APIC-012 - Update product using API client", async ({
     expect(body.price).toBe(500);
 });
 
-test("API-013 - Product response validation", async ({
+test("@regression API-013 - Product response validation", async ({
     apiClient
 }) => {
 
