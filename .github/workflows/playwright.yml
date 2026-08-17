@@ -6,13 +6,17 @@ on:
 
   pull_request:
     branches: [main, master]
-  
+
   schedule:
     - cron: "0 2 * * *"
 
 jobs:
 
-unit-tests:
+  # =========================
+  # UNIT TESTS
+  # =========================
+
+  unit-tests:
     name: Unit Tests
     timeout-minutes: 10
     runs-on: ubuntu-latest
@@ -32,6 +36,7 @@ unit-tests:
 
       - name: Run Unit Tests
         run: npm run test:unit
+
 
   # =========================
   # SMOKE TESTS
@@ -71,6 +76,7 @@ unit-tests:
         with:
           name: smoke-report
           path: playwright-report/
+          retention-days: 14
 
 
   # =========================
@@ -80,7 +86,6 @@ unit-tests:
   regression:
     name: Regression - ${{ matrix.browser }}
     needs: smoke
-
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
@@ -117,4 +122,4 @@ unit-tests:
         with:
           name: regression-report-${{ matrix.browser }}
           path: playwright-report/
-           retention-days: 14
+          retention-days: 14
