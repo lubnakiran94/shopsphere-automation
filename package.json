@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "tests:units": "vitest run",
+    "test:unit": "vitest run tests/units",
     "test:unit:watch": "vitest",
     "test:unit:coverage": "vitest run --coverage"
   },

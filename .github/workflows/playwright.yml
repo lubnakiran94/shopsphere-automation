@@ -35,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Run Unit Tests
-        run: npm run tests:units
+        run: npm run test:unit
 
 
   # =========================
