@@ -20,7 +20,7 @@ const products = [
 
 for (const product of products) {
 
-    test.only(
+    test(
         `API-025 - Create ${product.title}`,
         async ({ apiClient }) => {
 
