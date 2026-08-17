@@ -9,6 +9,10 @@ on:
 
 jobs:
 
+  # =========================
+  # SMOKE TESTS
+  # =========================
+
   smoke:
     name: Smoke Tests
     timeout-minutes: 20
@@ -41,4 +45,50 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: smoke-report
+          path: playwright-report/
+
+
+  # =========================
+  # FULL REGRESSION
+  # =========================
+
+  regression:
+    name: Regression - ${{ matrix.browser }}
+    needs: smoke
+
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+
+    env:
+      API_BASE_URL: https://dummyjson.com
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+
+      - name: Run Full Regression
+        run: npx playwright test --project=${{ matrix.browser }}
+
+      - name: Upload Regression Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-report-${{ matrix.browser }}
           path: playwright-report/
